@@ -11,25 +11,32 @@ body {
 }
 
 .container {
-  width: 550px;
+  height: 100vh;
   background-color: #F9FAFB;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(220px, 25vh) 1fr;
+  grid-template-areas: 
+    "top-search"
+    "movie-list";
 }
 
 .top-search {
+  grid-area: top-search;
   color: #ffffff;
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(img/andre-tan-THJJRUhNlEc-unsplash.jpg);
   background-color: #cecece;
   background-size: cover;
   background-position: 50% 20%;
-  min-height: 30vh;
   display: grid;
-  grid-template-columns: max-content 1fr;
+  grid-template-columns: 2vw repeat(2,minmax(max-content,1fr)) 2vw;
   grid-template-areas:
-    "   .       .   "
-    "header1 header2"
-    "search search";
-  align-items: baseline;
+    ". header1 header2 ."
+    ". search search . ";
+  column-gap: 0.5em;
+  justify-items: end;
+  align-items: end;
   position: relative;
 }
 
@@ -54,9 +61,26 @@ body {
   display: flex;
   flex-flow: row nowrap;
   position: absolute;
-  top: 1em;
+  top: 50px;
   grid-area: search;
   width: 100%;
+}
+
+@media (min-height:880px) {
+  .search-bar {
+    top: 6vh;
+  }
+}
+@media (min-height:1150px) {
+  .search-bar {
+    top: 8vh;
+  }
+}
+
+@media (min-height:1500px) {
+  .search-bar {
+    top: 9vh;
+  }
 }
 
 .search-bar i,
@@ -101,12 +125,10 @@ body {
   color: #ffffff;
 }
 
-.top-search,
-.movie-list {
-  padding: 0 2.75rem;
-}
+
 
 .movie-list {
+  grid-area: movie-list;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -127,3 +149,4 @@ body {
   margin-top: 0.5em;
   font-size: 1.125rem;
 }
+
