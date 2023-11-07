@@ -1,10 +1,19 @@
-const searchForm = document.querySelector("#search-bar")
+const searchForm = document.querySelector("#search-bar");
+const watchlistFromLocalStorage = JSON.parse(localStorage.getItem("watchlist"));
+const myWatchlist = new Set();
 
-  searchForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    fetchMovies(document.querySelector("#search-query").value);
-    searchForm.reset()
-  });
+searchForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  fetchMovies(document.querySelector("#search-query").value);
+  searchForm.reset();
+});
+
+document.body.addEventListener("click", function (e) {
+  if (e.target.parentElement.dataset.movieId) {
+    myWatchlist.add(e.target.parentElement.dataset.movieId);
+    window.localStorage.setItem("watchlist", JSON.stringify([...myWatchlist]));
+  }
+});
 
 async function fetchMovies(query) {
   const response = await fetch(
@@ -32,7 +41,7 @@ async function fetchMovies(query) {
       <div class="movie-info">
         <p>${data["Runtime"]}</p>
         <p>${data["Genre"]}</p>
-        <p class="watchlist-btn"><i class="fa-solid fa-plus"></i>Watchlist</p>
+        <div data-movie-id="${movie["imdbID"]}"><i class="fa-solid fa-plus"></i><p class="watchlist-btn">Watchlist</p></div>
       </div>
       <p class="movie-desc">${data["Plot"]}</p>
     </div>`;
@@ -41,6 +50,5 @@ async function fetchMovies(query) {
   // Convert the array of HTML strings to a single string
   const moviesHTMLString = moviesHTML.join("");
 
-  console.log(moviesHTMLString);
   document.querySelector("#movie-list").innerHTML = moviesHTMLString;
 }
