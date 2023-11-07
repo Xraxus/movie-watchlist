@@ -1,6 +1,5 @@
 const searchForm = document.querySelector("#search-bar");
-const watchlistFromLocalStorage = JSON.parse(localStorage.getItem("watchlist"));
-const myWatchlist = new Set();
+const myWatchlist = new Set(JSON.parse(localStorage.getItem("watchlist")));
 
 searchForm.addEventListener("submit", function (e) {
   e.preventDefault();
