@@ -10,6 +10,10 @@ body {
   background-color: #1c1c1c;
 }
 
+a:hover {
+  opacity: 70%;
+}
+
 .container {
   min-height: 100vh;
   width: 550px;
@@ -142,8 +146,8 @@ body {
 
 .status {
   margin: auto auto;
-  ========display: flex;
-  align-itemsz: center;
+  display: flex;
+  align-items: center;
   flex-flow: column nowrap;
   max-width: 60%;
   text-align: center;
@@ -219,11 +223,11 @@ body {
   white-space: nowrap;
 }
 
-.movie-watchlist-btn{
+.movie-watchlist-btn {
   cursor: pointer;
 }
 
-.movie-watchlist-btn:hover{
+.movie-watchlist-btn:hover {
   opacity: 70%;
 }
 
@@ -246,15 +250,27 @@ body {
   color: gold;
 }
 
-.fa-plus {
+.fa-plus,
+.fa-minus {
   margin-right: 4px;
   color: white;
   background-color: #1c1c1c;
-  padding: 0.25em 0.25em 0.25em 0.25em;
+  padding: 0.25em;
   border-radius: 50%;
 }
 
 .disabled {
   opacity: 50%;
   cursor: not-allowed;
+}
+
+.watchlist-link {
+  text-decoration: none;
+  color: #363636;
+  font-weight: 700;
+}
+
+.watchlist-link i {
+  background-color: #363636;
+  margin-right: 0.5em;
 }

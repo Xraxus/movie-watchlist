@@ -32,19 +32,20 @@ async function fetchMovies(query) {
 
     const moviesData = await Promise.all(moviePromises);
 
-    const moviesHTML = moviesData.map((data, index) => {
-      const movie = searchData[index];
+    const moviesHTML = moviesData.map((data) => {
+      const isWatchlisted = myWatchlist.has(data["imdbID"]) ? "disabled" : "";
+
       return `
       <div class="movie-card">
-        <img src="${movie["Poster"]}" alt="Movie poster of ${movie["Title"]}">
+        <img src="${data["Poster"]}" alt="Movie poster of ${data["Title"]}">
         <div class="movie-info">
-          <h3>${movie["Title"]}</h3>
+          <h3>${data["Title"]}</h3>
           <p class="movie-rating"><i class="fa-solid fa-star"></i>${data["imdbRating"]}</p>
         </div>
         <div class="movie-info">
           <p>${data["Runtime"]}</p>
           <p>${data["Genre"]}</p>
-          <div data-movie-id="${movie["imdbID"]}" class="movie-watchlist-btn"><i class="fa-solid fa-plus"></i><p class="watchlist-btn">Watchlist</p></div>
+          <div data-movie-id="${data["imdbID"]}" class="movie-watchlist-btn ${isWatchlisted}"><i class="fa-solid fa-plus"></i><p class="watchlist-btn">Watchlist</p></div>
         </div>
         <p class="movie-desc">${data["Plot"]}</p>
       </div>`;
