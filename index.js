@@ -17,7 +17,7 @@ document.body.addEventListener("click", function (e) {
 
 async function fetchMovies(query) {
   const response = await fetch(
-    `http://www.omdbapi.com/?apikey=d3633d59&s=${query}`
+    `https://www.omdbapi.com/?apikey=d3633d59&s=${query}`
   );
   const data = await response.json();
   const searchData = data["Search"];
