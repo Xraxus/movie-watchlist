@@ -11,6 +11,7 @@ document.body.addEventListener("click", function (e) {
   if (e.target.parentElement.dataset.movieId) {
     myWatchlist.add(e.target.parentElement.dataset.movieId);
     window.localStorage.setItem("watchlist", JSON.stringify([...myWatchlist]));
+    e.target.parentElement.classList.add("disabled");
   }
 });
 

@@ -135,7 +135,7 @@ body {
   min-height: 70vh;
 }
 
-.status{
+.status {
   margin: auto auto;
   display: flex;
   flex-flow: column nowrap;
@@ -234,6 +234,11 @@ body {
   margin-right: 4px;
   color: white;
   background-color: #1c1c1c;
-  padding: 0.25em 0.25em 0.25em 0.25em ;
+  padding: 0.25em 0.25em 0.25em 0.25em;
   border-radius: 50%;
+}
+
+.disabled {
+  opacity: 50%;
+  cursor: not-allowed;
 }
