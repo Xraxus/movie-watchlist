@@ -21,34 +21,41 @@ async function fetchMovies(query) {
   );
   const data = await response.json();
   const searchData = data["Search"];
-  const moviePromises = searchData.map(async (movie) => {
-    const response = await fetch(
-      `https://www.omdbapi.com/?apikey=d3633d59&i=${movie.imdbID}`
-    );
-    return response.json();
-  });
 
-  const moviesData = await Promise.all(moviePromises);
-  const moviesHTML = moviesData.map((data, index) => {
-    const movie = searchData[index];
-    return `
-    <div class="movie-card">
-      <img src="${movie["Poster"]}" alt="Movie poster of ${movie["Title"]}">
-      <div class="movie-info">
-        <h3>${movie["Title"]}</h3>
-        <p class="movie-rating"><i class="fa-solid fa-star"></i>${data["imdbRating"]}</p>
-      </div>
-      <div class="movie-info">
-        <p>${data["Runtime"]}</p>
-        <p>${data["Genre"]}</p>
-        <div data-movie-id="${movie["imdbID"]}"><i class="fa-solid fa-plus"></i><p class="watchlist-btn">Watchlist</p></div>
-      </div>
-      <p class="movie-desc">${data["Plot"]}</p>
-    </div>`;
-  });
+  try {
+    const moviePromises = searchData.map(async (movie) => {
+      const response = await fetch(
+        `https://www.omdbapi.com/?apikey=d3633d59&i=${movie.imdbID}`
+      );
+      return response.json();
+    });
 
-  // Convert the array of HTML strings to a single string
-  const moviesHTMLString = moviesHTML.join("");
+    const moviesData = await Promise.all(moviePromises);
 
-  document.querySelector("#movie-list").innerHTML = moviesHTMLString;
+    const moviesHTML = moviesData.map((data, index) => {
+      const movie = searchData[index];
+      return `
+      <div class="movie-card">
+        <img src="${movie["Poster"]}" alt="Movie poster of ${movie["Title"]}">
+        <div class="movie-info">
+          <h3>${movie["Title"]}</h3>
+          <p class="movie-rating"><i class="fa-solid fa-star"></i>${data["imdbRating"]}</p>
+        </div>
+        <div class="movie-info">
+          <p>${data["Runtime"]}</p>
+          <p>${data["Genre"]}</p>
+          <div data-movie-id="${movie["imdbID"]}" class="movie-watchlist-btn"><i class="fa-solid fa-plus"></i><p class="watchlist-btn">Watchlist</p></div>
+        </div>
+        <p class="movie-desc">${data["Plot"]}</p>
+      </div>`;
+    });
+
+    // Convert the array of HTML strings to a single string
+    const moviesHTMLString = moviesHTML.join("");
+
+    document.querySelector("#movie-list").innerHTML = moviesHTMLString;
+  } catch {
+    document.querySelector("#movie-list").innerHTML =
+      "<div class='status'><p class='status-text'>Unable to find what you’re looking for. Please try another search.</p></div>";
+  }
 }

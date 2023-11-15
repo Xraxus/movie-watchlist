@@ -96,6 +96,11 @@ body {
   font-weight: 600;
 }
 
+.search-bar input,
+.search-bar button {
+  font-size: 0.875rem;
+}
+
 .search-bar i {
   color: #9ca3af;
   background-color: #fff;
@@ -137,9 +142,11 @@ body {
 
 .status {
   margin: auto auto;
-  display: flex;
+  ========display: flex;
+  align-itemsz: center;
   flex-flow: column nowrap;
-  align-items: center;
+  max-width: 60%;
+  text-align: center;
 }
 
 .fa-film {
@@ -152,6 +159,7 @@ body {
 }
 
 .status-text {
+  font-weight: 700;
   margin-top: 0.5em;
   font-size: 1.125rem;
 }
@@ -209,6 +217,14 @@ body {
 .movie-rating {
   margin-left: auto;
   white-space: nowrap;
+}
+
+.movie-watchlist-btn{
+  cursor: pointer;
+}
+
+.movie-watchlist-btn:hover{
+  opacity: 70%;
 }
 
 .movie-card .movie-info:nth-of-type(1) {
