@@ -1,6 +1,3 @@
-
-Watchlist
-
 An application that allows users to search for movies and TV shows, and then add them to their "Watchlist".
 
 After entering a search query, the page sends a request to the OMDB API, and the returned results are rendered on the page.
