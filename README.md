@@ -6,4 +6,3 @@ Adding an item to the list saves it in the browser's localStorage, allowing the 
 
 
 Website - https://cosmic-medovik-21486f.netlify.app/
-GitHub - https://github.com/Xraxus/movie-watchlist
